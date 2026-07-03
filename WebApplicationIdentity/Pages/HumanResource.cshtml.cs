@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebApplicationIdentity.Pages
 {
-    [Authorize]
-    public class IndexModel : PageModel
+    [Authorize(Policy = "MustBelognToHRDepartment")]
+    public class HumanResourceModel : PageModel
     {
         public void OnGet()
         {
-
         }
     }
 }

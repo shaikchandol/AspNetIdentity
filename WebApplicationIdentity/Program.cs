@@ -7,6 +7,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddAuthentication().AddCookie("MyCookieAuth", Options =>
 {
     Options.Cookie.Name = "MyCookieAuth";
+    Options.LoginPath = "/Account/Login";
+});
+builder.    Services.AddAuthorization(options =>
+{
+    options.AddPolicy("MustBelognToHRDepartment", policy => policy.RequireClaim("Department", "HR"));
 });
 var app = builder.Build();
 
@@ -21,7 +26,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
-app.UseAuthentication()
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
